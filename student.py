@@ -1,20 +1,16 @@
-# from pymongo.mongo_client import MongoClient
-# from pymongo.server_api import ServerApi
-# uri = "mongodb+srv://domdypol:<password>@cluster0.hxrw0cv.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
-# client = MongoClient(uri, server_api=ServerApi('1'))
-# try:
-#     client.admin.command('ping')
-#     print("Pinged your deployment. You successfully connected to MongoDB!")
-# except Exception as e:
-#     print(e)
+from flask import Flask, jsonify, request
+from flask_cors import CORS
+from pymongo import MongoClient
 
-from flask import request,Flask,jsonify
-# from flask_basicauth import BasicAuth
-app = Flask(__name__) 
+# กำหนด URI ของ MongoDB
+mongo_uri = "mongodb+srv://domdypol:Dompol19@cluster0.hxrw0cv.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
 
-# app.config['BASIC_AUTH_USERNAME']='username'
-# app.config['BASIC_AUTH_PASSWORD']='password'
-# basic_auth = BasicAuth(app)
+# เชื่อมต่อ MongoDB
+client = MongoClient(mongo_uri)
+db = client["myStudent"]
+collection = db["product"]
+
+app = Flask(__name__)
 
 students=[
     {"id":6530300100,"Fullname":"Pollapat","Major":"CPE","GPA":4.00},
